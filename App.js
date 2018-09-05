@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View,  Button } from 'react-native';
 
 import ListItem from './src/components/ListItem/ListItem';
+import TextInputs from './src/components/TextInput/TextInputs';
+import PlacesOutput from './src/components/PlacesOutput/PlacesOutput';
 
 export default class App extends Component {
 
@@ -29,24 +31,13 @@ export default class App extends Component {
   }
 
   render() {
-    const placesOutput = this.state.places.map((place, i) => (
-      <ListItem key={i}  placeName={place} />
-    ))
-
+    
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer} >
-          <TextInput
-            placeholder="An Awesome place"
-            style={styles.placeInput}
-            value={this.state.placeName} onChangeText={this.placeNameChangedHandler}
-          />
-          <Button title="Add"
-           style={styles.placeButton} onPress={this.placeSubmitHandler} />
-        </View>
-        <View style={styles.listContainer} >
-          {placesOutput}
-        </View>        
+        <TextInputs value={this.state.placeName} 
+                   changeText={this.placeNameChangedHandler}
+                   PressButton={this.placeSubmitHandler} />
+        <PlacesOutput places={this.state.places} />      
       </View>
     );
   }
@@ -59,19 +50,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-  },
-  inputContainer: {
-    //flex: 1,
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  placeInput: {
-    width: "70%"
-  },
-  placeButton: {
-    width: "30%"
   },
   listContainer: {
     width: "100%"
